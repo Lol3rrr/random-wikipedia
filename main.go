@@ -11,14 +11,17 @@ func main() {
 
 	wikiSession := wikipedia.NewSession()
 	// Loading articles in unusual articles list
-	articles, err := wikiSession.GetAllArticlesInList(154126)
+	unusualArticles, err := wikiSession.GetList(154126, "Unusual Articles")
 	if err != nil {
 		logrus.Errorf("Could not load articles: %s", err)
 		return
 	}
 
-	for _, article := range articles {
+	for _, article := range unusualArticles.GetArticles() {
 		logrus.Infof("[%s] %s", article.Title, article.URL)
 	}
-	logrus.Infof("Loaded %d Articles", len(articles))
+	logrus.Infof("Loaded %d Articles", len(unusualArticles.GetArticles()))
+
+	randomArticle, _ := unusualArticles.GetRandomArticle()
+	logrus.Infof("Random Article: '%+v'", randomArticle)
 }

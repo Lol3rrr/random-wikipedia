@@ -1,20 +1,24 @@
 package wikipedia
 
-func (s *session) GetAllArticlesInList(pageID int) ([]Article, error) {
+func (s *session) GetList(pageID int, title string) (List, error) {
 	articles, continueKey, err := s.GetArticlesInList(pageID, "")
 	if err != nil {
-		return nil, err
+		return &list{}, err
 	}
 
 	for len(continueKey) > 0 {
 		tmpArticles, tmpContinue, err := s.GetArticlesInList(pageID, continueKey)
 		if err != nil {
-			return nil, err
+			return &list{}, err
 		}
 
 		articles = append(articles, tmpArticles...)
 		continueKey = tmpContinue
 	}
 
-	return articles, nil
+	return &list{
+		ID:       pageID,
+		Title:    title,
+		Articles: articles,
+	}, nil
 }
