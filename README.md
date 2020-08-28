@@ -14,3 +14,10 @@ A simple backend service to load and select random wikipedia articles
 `CREATE TABLE IF NOT EXISTS Userlists (ID TEXT NOT NULL PRIMARY KEY, ListID INTEGER);`
 ### Lists
 `CREATE TABLE IF NOT EXISTS Lists (ListID INTEGER PRIMARY KEY, Title TEXT NOT NULL);`
+
+## Secrets
+### /kv/data/wikipedia/email
+* SMTPServer: The Server Domain
+* ServerPort: The Port for the server
+* Email: The Email used for sending emails
+* Password: The Password for the email
