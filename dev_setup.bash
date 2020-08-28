@@ -21,6 +21,7 @@ VAULT_ADDR='http://0.0.0.0:8200' vault secrets enable database
 VAULT_ADDR='http://0.0.0.0:8200' vault write database/config/postgres plugin_name="postgresql-database-plugin" connection_url="postgresql://{{username}}:{{password}}@localhost:5432/devWikipedia?sslmode=disable" allowed_roles="random-wikipedia" username="devAdmin" password="devPassword"
 VAULT_ADDR='http://0.0.0.0:8200' vault write database/roles/random-wikipedia db_name="postgres" creation_statements="CREATE ROLE \"{{name}}\" WITH LOGIN PASSWORD '{{password}}' VALID UNTIL '{{expiration}}'; GRANT SELECT ON ALL TABLES IN SCHEMA public TO \"{{name}}\";" default_ttl="1h"
 VAULT_ADDR='http://0.0.0.0:8200' vault auth enable approle
-VAULT_ADDR='http://0.0.0.0:8200' vault write auth/approle/role/random-wikipedia token_ttl="20m" policies="root"
+VAULT_ADDR='http://0.0.0.0:8200' vault policy write random-wikipedia ./policy.hcl
+VAULT_ADDR='http://0.0.0.0:8200' vault write auth/approle/role/random-wikipedia token_ttl="20m" policies="random-wikipedia"
 VAULT_ADDR='http://0.0.0.0:8200' vault read auth/approle/role/random-wikipedia/role-id
 VAULT_ADDR='http://0.0.0.0:8200' vault write -force auth/approle/role/random-wikipedia/secret-id
