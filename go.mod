@@ -11,5 +11,5 @@ require (
 	github.com/lib/pq v1.8.0
 	github.com/sirupsen/logrus v1.6.0
 	github.com/stretchr/testify v1.6.1
-	golang.org/x/sys v0.0.0-20200828161417-c663848e9a16 // indirect
+	golang.org/x/sys v0.0.0-20200828194041-157a740278f4 // indirect
 )
