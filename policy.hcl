@@ -7,5 +7,5 @@ path "/database/creds/random-wikipedia" {
 }
 
 path "/kv/data/wikipedia/vapidKeys" {
-  capabilities = ["read", "update"]
+  capabilities = ["read", "update", "create"]
 }
