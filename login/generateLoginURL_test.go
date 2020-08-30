@@ -19,14 +19,14 @@ func TestGenerateLoginURL(t *testing.T) {
 			InputBaseURL:  "https://example.com",
 			InputEmail:    "test@example.com",
 			InputPassword: "ADaasd132/1da)ADAS(DAsd!asd$",
-			ResultURL:     "https://example.com/login/confirm?email=test%40example.com&password=ADaasd132%2F1da%29ADAS%28DAsd%21asd%24",
+			ResultURL:     "https://example.com/api/login/confirm?email=test%40example.com&password=ADaasd132%2F1da%29ADAS%28DAsd%21asd%24",
 		},
 		{
 			Name:          "Valid with trailing / on baseURL",
 			InputBaseURL:  "https://example.com/",
 			InputEmail:    "test@example.com",
 			InputPassword: "ADaasd132/1da)ADAS(DAsd!asd$",
-			ResultURL:     "https://example.com/login/confirm?email=test%40example.com&password=ADaasd132%2F1da%29ADAS%28DAsd%21asd%24",
+			ResultURL:     "https://example.com/api/login/confirm?email=test%40example.com&password=ADaasd132%2F1da%29ADAS%28DAsd%21asd%24",
 		},
 	}
 

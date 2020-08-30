@@ -19,6 +19,11 @@ func NewSession(vault cvault.Session) (Session, error) {
 		return nil, errors.New("Could not load 'SMTPServer' from Vault")
 	}
 
+	port, worked := emailConfig["ServerPort"].(string)
+	if !worked {
+		return nil, errors.New("Could not load 'ServerPort' from Vault")
+	}
+
 	email, worked := emailConfig["Email"].(string)
 	if !worked {
 		return nil, errors.New("Could not load 'Email' from Vault")
@@ -32,7 +37,7 @@ func NewSession(vault cvault.Session) (Session, error) {
 	emailAuth := smtp.PlainAuth("", email, password, server)
 
 	return &session{
-		SMTPServer:  server,
+		SMTPServer:  server + ":" + port,
 		SourceEmail: email,
 		Auth:        emailAuth,
 	}, nil

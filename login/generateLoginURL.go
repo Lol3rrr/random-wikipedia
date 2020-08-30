@@ -7,7 +7,7 @@ import (
 
 func generateLoginURL(rawBaseURL, email, password string) string {
 	baseURL, _ := url.Parse(rawBaseURL)
-	baseURL.Path = path.Join(baseURL.Path, "/login/confirm")
+	baseURL.Path = path.Join(baseURL.Path, "/api/login/confirm")
 
 	q, _ := url.ParseQuery("")
 	q.Add("email", email)

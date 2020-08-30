@@ -2,6 +2,8 @@
 A simple backend service to load and select random wikipedia articles
 
 ## Tables
+All Tables can also be renamed, by adding a simple Prefix to them.
+The Prefix is defined using an environment varialbe and will simply be added to the front of all the names
 ### Users
 `CREATE TABLE IF NOT EXISTS Users (ID TEXT NOT NULL PRIMARY KEY, SessionID TEXT NOT NULL, Email TEXT NOT NULL);`
 ### Passwords

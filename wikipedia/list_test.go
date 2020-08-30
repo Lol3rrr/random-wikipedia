@@ -6,39 +6,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetID(t *testing.T) {
-	testList := &list{
-		ID: 123,
-	}
-
-	outputID := testList.GetID()
-	assert.Equal(t, testList.ID, outputID)
-}
-
-func TestGetTitle(t *testing.T) {
-	testList := &list{
-		Title: "testTitle",
-	}
-
-	outputTitle := testList.GetTitle()
-	assert.Equal(t, testList.Title, outputTitle)
-}
-
-func TestGetArticles(t *testing.T) {
-	testList := &list{
-		Articles: []Article{
-			{
-				ID:    123,
-				Title: "testTitle",
-				URL:   "testURL",
-			},
-		},
-	}
-
-	outputArticles := testList.GetArticles()
-	assert.Equal(t, testList.Articles, outputArticles)
-}
-
 func TestGetRandomArticle(t *testing.T) {
 	tables := []struct {
 		Name        string

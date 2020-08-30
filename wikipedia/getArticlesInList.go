@@ -21,7 +21,7 @@ type linksResponse struct {
 	Query         queryResult       `json:"query"`
 }
 
-func (s *session) GetArticlesInList(pageID int, plContinue string) ([]Article, string, error) {
+func (s *session) getArticlesInList(pageID int, plContinue string) ([]Article, string, error) {
 	var urlBuilder strings.Builder
 	urlBuilder.WriteString(s.BaseURL)
 	urlBuilder.WriteString("/w/api.php?action=query&format=json&pageids=")

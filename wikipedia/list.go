@@ -6,16 +6,6 @@ import (
 	"time"
 )
 
-func (l *list) GetID() int {
-	return l.ID
-}
-func (l *list) GetTitle() string {
-	return l.Title
-}
-func (l *list) GetArticles() []Article {
-	return l.Articles
-}
-
 func (l *list) GetRandomArticle() (Article, error) {
 	length := len(l.Articles)
 	if length <= 0 {
