@@ -72,6 +72,7 @@ func main() {
 	// Do all the notification sending stuff
 	go background.SendNotifications(loginSession, wikiSession, notificationSession, databaseSession)
 
+	port := general.GetEnvInt("API_PORT", 80)
 	apiSession := api.NewAPI(loginSession, notificationSession, wikiSession, databaseSession)
-	apiSession.Start(8080)
+	apiSession.Start(port)
 }
