@@ -15,22 +15,22 @@ func NewSession(vault cvault.Session) (Session, error) {
 	}
 
 	server, worked := emailConfig["SMTPServer"].(string)
-	if !worked {
+	if !worked || len(server) <= 0 {
 		return nil, errors.New("Could not load 'SMTPServer' from Vault")
 	}
 
 	port, worked := emailConfig["ServerPort"].(string)
-	if !worked {
+	if !worked || len(port) <= 0 {
 		return nil, errors.New("Could not load 'ServerPort' from Vault")
 	}
 
 	email, worked := emailConfig["Email"].(string)
-	if !worked {
+	if !worked || len(email) <= 0 {
 		return nil, errors.New("Could not load 'Email' from Vault")
 	}
 
 	password, worked := emailConfig["Password"].(string)
-	if !worked {
+	if !worked || len(password) <= 0 {
 		return nil, errors.New("Could not load 'Password' from Vault")
 	}
 
