@@ -13,7 +13,7 @@ func (s *session) InsertSubscription(ID, subscription string, update bool) error
 			insertQuery = `INSERT INTO ` + s.NotificationsTable + ` (ID, Subscription)
 			VALUES ($1, $2)
 			ON CONFLICT (ID)
-			DO SET Subscription=$2;`
+			DO UPDATE SET Subscription=$2;`
 		}
 
 		_, err := con.Exec(insertQuery, ID, subscription)

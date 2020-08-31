@@ -16,7 +16,7 @@ func (s *session) InsertSettings(ID string, nSettings general.Settings, update b
 			insertQuery = `INSERT INTO ` + s.SettingsTable + ` (ID, NotifyTime)
 			VALUES ($1, $2)
 			ON CONFLICT (ID)
-			DO SET NotifyTime=$2;`
+			DO UPDATE SET NotifyTime=$2;`
 		}
 
 		_, err := con.Exec(insertQuery, ID, nSettings.NotificationTime)
