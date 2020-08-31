@@ -11,7 +11,7 @@ func (s *session) LoadUserID(ID string) (general.User, error) {
 	}
 
 	err := s.SQLSession.WithRetry(func(con *sql.DB) error {
-		loadSubscriptionQuery := `SELECT N.Subscription, S.NotifiyTime
+		loadSubscriptionQuery := `SELECT N.Subscription, S.NotifyTime
 		FROM ` + s.NotificationsTable + ` as N
 		INNER JOIN ` + s.SettingsTable + ` as S
 		ON N.ID=S.ID
