@@ -16,6 +16,9 @@ import (
 func SendNotifications(loginSession login.Session, wikipediaSession wikipedia.Session, notificationSession notifications.Session, dbSession database.Session) {
 	interval := 15 * time.Minute
 	waitDuraiton := general.CalculateTimeToInterval(time.Now().UTC(), interval)
+
+	logrus.Infof("Waiting %d to be back on the interval", waitDuraiton)
+
 	time.Sleep(waitDuraiton)
 
 	for {
