@@ -15,7 +15,7 @@ import (
 // that need to be send in the current part
 func SendNotifications(loginSession login.Session, wikipediaSession wikipedia.Session, notificationSession notifications.Session, dbSession database.Session) {
 	interval := 15 * time.Minute
-	waitDuraiton := general.CalculateTimeToInterval(time.Now().UTC(), interval)
+	waitDuraiton := general.CalculateTimeToInterval(time.Now(), interval)
 
 	logrus.Infof("Waiting %d to be back on the interval", waitDuraiton)
 

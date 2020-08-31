@@ -26,6 +26,12 @@ func TestCalculateTimeToInterval(t *testing.T) {
 			InputInterval: 5 * time.Minute,
 			Result:        2 * time.Minute,
 		},
+		{
+			Name:          "Valid",
+			InputTime:     time.Unix(1598891919, 0),
+			InputInterval: 15 * time.Minute,
+			Result:        6*time.Minute + 21*time.Second,
+		},
 	}
 
 	for _, table := range tables {
