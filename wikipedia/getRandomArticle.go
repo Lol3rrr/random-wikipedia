@@ -6,7 +6,11 @@ import (
 )
 
 func (s *session) GetRandomArticle(listIDs []int) (Article, error) {
-	listID := listIDs[rand.Intn(len(listIDs))]
+	listSize := len(listIDs)
+	if listSize <= 0 {
+		return Article{}, errors.New("No lists possible")
+	}
+	listID := listIDs[rand.Intn(listSize)]
 
 	list, found := s.Lists[listID]
 	if !found {
