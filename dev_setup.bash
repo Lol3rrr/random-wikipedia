@@ -8,7 +8,8 @@ docker exec -it $POSTGRES_ID psql -d devWikipedia -U devAdmin -c 'CREATE TABLE I
 docker exec -it $POSTGRES_ID psql -d devWikipedia -U devAdmin -c 'CREATE TABLE IF NOT EXISTS Passwords (ID TEXT NOT NULL PRIMARY KEY, Password TEXT NOT NULL, Expiration INTEGER);';
 docker exec -it $POSTGRES_ID psql -d devWikipedia -U devAdmin -c 'CREATE TABLE IF NOT EXISTS Notifications (ID TEXT NOT NULL PRIMARY KEY, Subscription TEXT NOT NULL);';
 docker exec -it $POSTGRES_ID psql -d devWikipedia -U devAdmin -c 'CREATE TABLE IF NOT EXISTS Settings (ID TEXT NOT NULL PRIMARY KEY, Notifytime INTEGER);';
-docker exec -it $POSTGRES_ID psql -d devWikipedia -U devAdmin -c 'CREATE TABLE IF NOT EXISTS Userlists (ID TEXT NOT NULL PRIMARY KEY, ListID INTEGER);';
+docker exec -it $POSTGRES_ID psql -d devWikipedia -U devAdmin -c 'CREATE TABLE IF NOT EXISTS Userlists (ID TEXT NOT NULL, ListID INTEGER);';
+docker exec -it $POSTGRES_ID psql -d devWikipedia -U devAdmin -c 'CREATE UNIQUE INDEX idx_Userlists_ID_ListID on Userlists (ID, ListID);';
 docker exec -it $POSTGRES_ID psql -d devWikipedia -U devAdmin -c 'CREATE TABLE IF NOT EXISTS Lists (ListID INTEGER PRIMARY KEY, Title TEXT NOT NULL);';
 
 VAULT_ID=$(docker run --cap-add=IPC_LOCK -d --network host -e 'VAULT_LOCAL_CONFIG={"backend": {"file": {"path": "/vault/file"}}}' vault server -dev);

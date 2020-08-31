@@ -71,6 +71,12 @@ func (m *MockDatabase) LoadUsersNotifyTime(notifyTime int) ([]general.User, erro
 	return args.Get(0).([]general.User), args.Error(1)
 }
 
+// InsertUserList is needed to comply with the interface
+func (m *MockDatabase) InsertUserList(ID string, listID int) error {
+	args := m.Called(ID, listID)
+	return args.Error(0)
+}
+
 // InsertList is needed to comply with the interface
 func (m *MockDatabase) InsertList(listID int, title string) error {
 	args := m.Called(listID, title)

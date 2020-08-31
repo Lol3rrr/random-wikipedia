@@ -21,6 +21,7 @@ type Session interface {
 	LoadUserID(ID string) (general.User, error)
 	LoadUserSessionID(SessionID string) (general.User, error)
 	LoadUsersNotifyTime(notifyTime int) ([]general.User, error)
+	InsertUserList(ID string, listID int) error
 
 	InsertList(listID int, title string) error
 }
