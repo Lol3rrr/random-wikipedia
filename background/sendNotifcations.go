@@ -7,6 +7,8 @@ import (
 	"random_wikipedia/notifications"
 	"random_wikipedia/wikipedia"
 	"time"
+
+	"github.com/sirupsen/logrus"
 )
 
 // SendNotifications checks if there are any notifications
@@ -20,8 +22,13 @@ func SendNotifications(loginSession login.Session, wikipediaSession wikipedia.Se
 		startTime := time.Now()
 
 		currentTime := startTime.UTC()
-		users, err := dbSession.LoadUsersNotifyTime(general.TimeToInteger(currentTime))
+		currentTimeStamp := general.TimeToInteger(currentTime)
+
+		logrus.Infof("Sending Notifications at %d", currentTimeStamp)
+
+		users, err := dbSession.LoadUsersNotifyTime(currentTimeStamp)
 		if err == nil {
+			logrus.Infof("Sending %d Notifications", len(users))
 			for _, user := range users {
 				sendUserNotification(user, wikipediaSession, notificationSession)
 			}
