@@ -1,7 +1,6 @@
 package background
 
 import (
-	"encoding/json"
 	"random_wikipedia/database"
 	"random_wikipedia/general"
 	"random_wikipedia/login"
@@ -9,27 +8,6 @@ import (
 	"random_wikipedia/wikipedia"
 	"time"
 )
-
-func sendUserNotification(user general.User, wSession wikipedia.Session, nSession notifications.Session) {
-	article, err := wSession.GetRandomArticle(user.Lists)
-	if err != nil {
-		return
-	}
-
-	tmpNotification := general.ArticleNotification{
-		Title: article.Title,
-		URL:   article.URL,
-	}
-	notifyBytes, err := json.Marshal(tmpNotification)
-	if err != nil {
-		return
-	}
-
-	err = nSession.SendNotification(notifyBytes, user)
-	if err != nil {
-		return
-	}
-}
 
 // SendNotifications checks if there are any notifications
 // that need to be send in the current part
