@@ -15,7 +15,7 @@ func getSessionID(ctx *fiber.Ctx) (string, error) {
 	}
 
 	sessionHeader := ctx.Get("x-session")
-	if len(sessionCookie) > 0 {
+	if len(sessionHeader) > 0 {
 		return sessionHeader, nil
 	}
 
