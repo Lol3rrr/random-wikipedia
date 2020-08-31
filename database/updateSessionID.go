@@ -4,7 +4,7 @@ import "database/sql"
 
 func (s *session) UpdateSessionID(ID, SessionID string) error {
 	err := s.SQLSession.WithRetry(func(con *sql.DB) error {
-		updateQuery := `UPDATE Users
+		updateQuery := `UPDATE ` + s.UsersTable + `
 		SET SessionID=$2
 		WHERE ID=$1;`
 		_, err := con.Exec(updateQuery, ID, SessionID)
