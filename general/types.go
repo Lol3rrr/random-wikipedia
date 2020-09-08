@@ -2,10 +2,10 @@ package general
 
 // User represents a single User instance
 type User struct {
-	ID           string
-	Subscription string
-	Settings     Settings
-	Lists        []int
+	ID           string   `json:"ID"`
+	Subscription string   `json:"Subscription"`
+	Settings     Settings `json:"Settings"`
+	Lists        []int    `json:"Lists"`
 }
 
 // Settings reprents a single users Settings

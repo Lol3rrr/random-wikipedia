@@ -30,6 +30,8 @@ func NewAPI(
 	app.Add(fiber.MethodGet, "/api/publickey", result.handlePublicKey)
 	app.Add(fiber.MethodPost, "/api/subscription/update", result.Auth, result.handleUpdateSubscripton)
 
+	app.Add(fiber.MethodGet, "/api/user/load/myself", result.Auth, result.handleLoadUserMyself)
+
 	app.Add(fiber.MethodPost, "/api/settings/update", result.Auth, result.handleUpdateSettings)
 	app.Add(fiber.MethodPost, "/api/settings/lists/add", result.Auth, result.handleAddUserlist)
 
