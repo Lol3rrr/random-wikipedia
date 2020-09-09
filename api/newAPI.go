@@ -36,6 +36,7 @@ func NewAPI(
 
 	app.Add(fiber.MethodPost, "/api/settings/update", result.Auth, result.handleUpdateSettings)
 	app.Add(fiber.MethodPost, "/api/settings/lists/add", result.Auth, result.handleAddUserlist)
+	app.Add(fiber.MethodPost, "/api/settings/lists/delete", result.Auth, result.handleDeleteUserlist)
 
 	app.Add(fiber.MethodGet, "/api/lists/all", result.handleAllLists)
 

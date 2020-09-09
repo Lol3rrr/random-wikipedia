@@ -13,5 +13,7 @@ func NewSession(sqlSession *sqlvault.DB, tablePrefix string) Session {
 		SettingsTable:      tablePrefix + "Settings",
 		UserlistsTable:     tablePrefix + "Userlists",
 		ListsTable:         tablePrefix + "Lists",
+		FavoritesTable:     tablePrefix + "Favorites",
+		FavArticlesTable:   tablePrefix + "FavArticles",
 	}
 }

@@ -22,6 +22,8 @@ type Session interface {
 	LoadUserSessionID(SessionID string) (general.User, error)
 	LoadUsersNotifyTime(notifyTime int) ([]general.User, error)
 	InsertUserList(ID string, listID int) error
+	RemoveUserList(ID string, listID int) error
+	InsertUserFavorite(ID string, ArticleID int, ArticleTitle, ArticleURL string) error
 
 	InsertList(listID int, title string) error
 }
@@ -35,4 +37,6 @@ type session struct {
 	SettingsTable      string
 	UserlistsTable     string
 	ListsTable         string
+	FavoritesTable     string
+	FavArticlesTable   string
 }

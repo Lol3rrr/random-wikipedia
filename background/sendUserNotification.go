@@ -8,7 +8,12 @@ import (
 )
 
 func sendUserNotification(user general.User, wSession wikipedia.Session, nSession notifications.Session) {
-	article, err := wSession.GetRandomArticle(user.Lists)
+	ids := make([]int, 0, len(user.Lists))
+	for _, tmpList := range user.Lists {
+		ids = append(ids, tmpList.ID)
+	}
+
+	article, err := wSession.GetRandomArticle(ids)
 	if err != nil {
 		return
 	}

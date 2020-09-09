@@ -19,10 +19,6 @@ func (s *session) LoadUsersNotifyTime(notifyTime int) ([]general.User, error) {
 			return err
 		}
 
-		loadUserQuery := `SELECT ListID
-		FROM ` + s.UserlistsTable +
-			` WHERE ID=$1`
-
 		for rows.Next() {
 			var id string
 			var subscription string
@@ -34,21 +30,9 @@ func (s *session) LoadUsersNotifyTime(notifyTime int) ([]general.User, error) {
 				continue
 			}
 
-			lists := make([]int, 0)
-			listRows, err := con.Query(loadUserQuery, id)
+			lists, err := queryUserLists(con, s.UserlistsTable, s.ListsTable, id)
 			if err != nil {
 				continue
-			}
-
-			for listRows.Next() {
-				var tmpListID int = -1
-				if err := listRows.Scan(&tmpListID); err != nil {
-					continue
-				}
-				if tmpListID < 0 {
-					continue
-				}
-				lists = append(lists, tmpListID)
 			}
 
 			result = append(result, general.User{
