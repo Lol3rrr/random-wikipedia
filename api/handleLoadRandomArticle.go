@@ -2,6 +2,7 @@ package api
 
 import (
 	"net/http"
+	"random_wikipedia/general"
 
 	"github.com/gofiber/fiber"
 	"github.com/sirupsen/logrus"
@@ -32,7 +33,13 @@ func (a *api) handleLoadRandomArticle(ctx *fiber.Ctx) {
 		return
 	}
 
-	err = ctx.JSON(article)
+	articleResponse := general.ArticleNotification{
+		ID:    article.ID,
+		Title: article.Title,
+		URL:   article.URL,
+	}
+
+	err = ctx.JSON(articleResponse)
 	if err != nil {
 		logrus.Errorf("[Article/Random] Sending JSON: %v", err)
 	}

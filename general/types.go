@@ -15,6 +15,7 @@ type Settings struct {
 
 // ArticleNotification holds all the information for a Notification
 type ArticleNotification struct {
+	ID    int    `json:"ID"`
 	Title string `json:"Title"`
 	URL   string `json:"URL"`
 }

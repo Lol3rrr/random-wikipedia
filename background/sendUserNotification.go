@@ -14,6 +14,7 @@ func sendUserNotification(user general.User, wSession wikipedia.Session, nSessio
 	}
 
 	tmpNotification := general.ArticleNotification{
+		ID:    article.ID,
 		Title: article.Title,
 		URL:   article.URL,
 	}
