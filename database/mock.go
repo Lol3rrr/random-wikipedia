@@ -77,6 +77,18 @@ func (m *MockDatabase) InsertUserList(ID string, listID int) error {
 	return args.Error(0)
 }
 
+// RemoveUserList is needed to comply with the interface
+func (m *MockDatabase) RemoveUserList(ID string, listID int) error {
+	args := m.Called(ID, listID)
+	return args.Error(0)
+}
+
+// InsertUserFavorite is needed to comply with the interface
+func (m *MockDatabase) InsertUserFavorite(ID string, ArticleID int, ArticleTitle, ArticleURL string) error {
+	args := m.Called(ID, ArticleID, ArticleTitle, ArticleURL)
+	return args.Error(0)
+}
+
 // InsertList is needed to comply with the interface
 func (m *MockDatabase) InsertList(listID int, title string) error {
 	args := m.Called(listID, title)
