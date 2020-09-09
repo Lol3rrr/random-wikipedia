@@ -1,11 +1,12 @@
 package database
 
 import (
-	"database/sql"
 	"random_wikipedia/general"
+
+	"github.com/Lol3rrr/sqlvault"
 )
 
-func queryUserLists(con *sql.DB, userListsTable, listsTable, userID string) ([]general.List, error) {
+func queryUserLists(con sqlvault.DB, userListsTable, listsTable, userID string) ([]general.List, error) {
 	result := make([]general.List, 0)
 
 	loadListsQuery := `SELECT L.ListID, L.Title

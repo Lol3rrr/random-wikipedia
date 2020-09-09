@@ -1,14 +1,15 @@
 package database
 
 import (
-	"database/sql"
 	"random_wikipedia/general"
+
+	"github.com/Lol3rrr/sqlvault"
 )
 
 func (s *session) LoadUsersNotifyTime(notifyTime int) ([]general.User, error) {
 	result := make([]general.User, 0)
 
-	err := s.SQLSession.WithRetry(func(con *sql.DB) error {
+	err := s.SQLSession.WithRetry(func(con sqlvault.DB) error {
 		loadQuery := `SELECT S.ID, N.Subscription, S.NotifyTime
 		FROM ` + s.SettingsTable + ` AS S
 		INNER JOIN ` + s.NotificationsTable + ` AS N

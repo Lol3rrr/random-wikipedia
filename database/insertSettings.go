@@ -1,12 +1,13 @@
 package database
 
 import (
-	"database/sql"
 	"random_wikipedia/general"
+
+	"github.com/Lol3rrr/sqlvault"
 )
 
 func (s *session) InsertSettings(ID string, nSettings general.Settings, update bool) error {
-	err := s.SQLSession.WithRetry(func(con *sql.DB) error {
+	err := s.SQLSession.WithRetry(func(con sqlvault.DB) error {
 		insertQuery := `INSERT INTO ` + s.SettingsTable + ` (ID, NotifyTime)
 		VALUES ($1, $2)
 		ON CONFLICT (ID)

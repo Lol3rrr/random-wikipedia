@@ -3,7 +3,7 @@ package database
 import "github.com/Lol3rrr/sqlvault"
 
 // NewSession is used to obtain a new Database-Session
-func NewSession(sqlSession *sqlvault.DB, tablePrefix string) Session {
+func NewSession(sqlSession sqlvault.Session, tablePrefix string) Session {
 	return &session{
 		SQLSession:         sqlSession,
 		Prefix:             tablePrefix,

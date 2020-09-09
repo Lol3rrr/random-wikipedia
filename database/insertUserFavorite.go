@@ -1,11 +1,9 @@
 package database
 
-import (
-	"database/sql"
-)
+import "github.com/Lol3rrr/sqlvault"
 
 func (s *session) InsertUserFavorite(ID string, ArticleID int, ArticleTitle, ArticleURL string) error {
-	err := s.SQLSession.WithRetry(func(con *sql.DB) error {
+	err := s.SQLSession.WithRetry(func(con sqlvault.DB) error {
 		insertFavArticleQuery := `INSERT INTO ` +
 			s.FavArticlesTable + ` (ArticleID, Title, URL)
 			VALUES ($1, $2, $3)

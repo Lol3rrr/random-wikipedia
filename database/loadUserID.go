@@ -1,11 +1,12 @@
 package database
 
 import (
-	"database/sql"
 	"random_wikipedia/general"
+
+	"github.com/Lol3rrr/sqlvault"
 )
 
-func loadUserFavorites(con *sql.DB, favoriteTable, favArticlesTable, userID string) ([]general.Article, error) {
+func loadUserFavorites(con sqlvault.DB, favoriteTable, favArticlesTable, userID string) ([]general.Article, error) {
 	result := make([]general.Article, 0)
 
 	loadFavoritesQuery := `SELECT FA.ArticleID, FA.Title, FA.URL
@@ -35,7 +36,7 @@ func (s *session) LoadUserID(ID string) (general.User, error) {
 		ID: ID,
 	}
 
-	err := s.SQLSession.WithRetry(func(con *sql.DB) error {
+	err := s.SQLSession.WithRetry(func(con sqlvault.DB) error {
 		loadSubscriptionQuery := `SELECT N.Subscription, S.NotifyTime
 		FROM ` + s.NotificationsTable + ` as N
 		INNER JOIN ` + s.SettingsTable + ` as S

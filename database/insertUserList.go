@@ -1,9 +1,9 @@
 package database
 
-import "database/sql"
+import "github.com/Lol3rrr/sqlvault"
 
 func (s *session) InsertUserList(ID string, listID int) error {
-	err := s.SQLSession.WithRetry(func(con *sql.DB) error {
+	err := s.SQLSession.WithRetry(func(con sqlvault.DB) error {
 		insertQuery := `INSERT INTO ` + s.UserlistsTable + ` (ID, ListID)
 		VALUES ($1, $2)
 		ON CONFLICT (ID, ListID)

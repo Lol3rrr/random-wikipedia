@@ -1,9 +1,9 @@
 package database
 
-import "database/sql"
+import "github.com/Lol3rrr/sqlvault"
 
 func (s *session) UpdateSessionID(ID, SessionID string) error {
-	err := s.SQLSession.WithRetry(func(con *sql.DB) error {
+	err := s.SQLSession.WithRetry(func(con sqlvault.DB) error {
 		updateQuery := `UPDATE ` + s.UsersTable + `
 		SET SessionID=$2
 		WHERE ID=$1;`

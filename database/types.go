@@ -29,7 +29,7 @@ type Session interface {
 }
 
 type session struct {
-	SQLSession         *sqlvault.DB
+	SQLSession         sqlvault.Session
 	Prefix             string
 	UsersTable         string
 	PasswordsTable     string
