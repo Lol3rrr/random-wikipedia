@@ -24,6 +24,8 @@ func NewAPI(
 
 	app := fiber.New()
 
+	app.Add(fiber.MethodPost, "/api/article/random", result.handleLoadRandomArticle)
+
 	app.Add(fiber.MethodPost, "/api/login/", result.handleLogin)
 	app.Add(fiber.MethodGet, "/api/login/confirm", result.handleLoginConfirm)
 
