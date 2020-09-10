@@ -24,6 +24,7 @@ type Session interface {
 	InsertUserList(ID string, listID int) error
 	RemoveUserList(ID string, listID int) error
 	InsertUserFavorite(ID string, ArticleID int, ArticleTitle, ArticleURL string) error
+	RemoveUserFavorite(ID string, ArticleID int) error
 
 	InsertList(listID int, title string) error
 }

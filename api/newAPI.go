@@ -38,6 +38,7 @@ func NewAPI(
 	app.Add(fiber.MethodPost, "/api/settings/lists/add", result.Auth, result.handleAddUserlist)
 	app.Add(fiber.MethodPost, "/api/settings/lists/delete", result.Auth, result.handleDeleteUserlist)
 	app.Add(fiber.MethodPost, "/api/settings/favorites/add", result.Auth, result.handleAddUserFavorite)
+	app.Add(fiber.MethodPost, "/api/settings/favorites/delete", result.Auth, result.handleDeleteFavorite)
 
 	app.Add(fiber.MethodGet, "/api/lists/all", result.handleAllLists)
 
