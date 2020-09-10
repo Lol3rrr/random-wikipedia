@@ -8,7 +8,7 @@ func (s *session) InsertUserFavorite(ID string, ArticleID int, ArticleTitle, Art
 			s.FavArticlesTable + ` (ArticleID, Title, URL)
 			VALUES ($1, $2, $3)
 			ON CONFLICT
-			DO NOTHINNG;`
+			DO NOTHING;`
 
 		_, err := con.Exec(insertFavArticleQuery, ArticleID, ArticleTitle, ArticleURL)
 		if err != nil {
