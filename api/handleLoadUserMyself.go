@@ -3,14 +3,11 @@ package api
 import (
 	"random_wikipedia/general"
 
-	"github.com/gofiber/fiber"
-	"github.com/sirupsen/logrus"
+	"github.com/gofiber/fiber/v2"
 )
 
-func (a *api) handleLoadUserMyself(ctx *fiber.Ctx) {
+func (a *api) handleLoadUserMyself(ctx *fiber.Ctx) error {
 	user := ctx.Locals("user").(general.User)
 
-	if err := ctx.JSON(user); err != nil {
-		logrus.Errorf("[User/Load/Myself] Sending JSON: %v", err)
-	}
+	return ctx.JSON(user)
 }

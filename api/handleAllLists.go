@@ -1,18 +1,15 @@
 package api
 
 import (
-	"github.com/gofiber/fiber"
-	"github.com/sirupsen/logrus"
+	"github.com/gofiber/fiber/v2"
 )
 
-func (a *api) handleAllLists(ctx *fiber.Ctx) {
+func (a *api) handleAllLists(ctx *fiber.Ctx) error {
 	lists := a.WikipediaSession.GetLists()
 
 	result := map[string]interface{}{
 		"Lists": lists,
 	}
 
-	if err := ctx.JSON(result); err != nil {
-		logrus.Errorf("[Lists/All] Sending JSON: %v", err)
-	}
+	return ctx.JSON(result)
 }

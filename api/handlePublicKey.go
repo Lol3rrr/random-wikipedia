@@ -1,17 +1,13 @@
 package api
 
 import (
-	"github.com/gofiber/fiber"
-	"github.com/sirupsen/logrus"
+	"github.com/gofiber/fiber/v2"
 )
 
-func (a *api) handlePublicKey(ctx *fiber.Ctx) {
+func (a *api) handlePublicKey(ctx *fiber.Ctx) error {
 	result := map[string]string{
 		"PublicKey": a.NotificationSession.GetPublicKey(),
 	}
 
-	err := ctx.JSON(result)
-	if err != nil {
-		logrus.Errorf("Could not send JSON response: %v", err)
-	}
+	return ctx.JSON(result)
 }

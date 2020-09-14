@@ -6,7 +6,7 @@ import (
 	"random_wikipedia/notifications"
 	"random_wikipedia/wikipedia"
 
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 )
 
 // NewAPI is used to obtain a new API session

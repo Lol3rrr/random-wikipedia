@@ -4,30 +4,27 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
 )
 
-func (a *api) handleLoginConfirm(ctx *fiber.Ctx) {
+func (a *api) handleLoginConfirm(ctx *fiber.Ctx) error {
 	email := ctx.Query("email")
 	if len(email) <= 0 {
-		ctx.SendStatus(http.StatusBadRequest)
 		logrus.Errorf("[Login/Confirm] Missing email")
-		return
+		return ctx.SendStatus(http.StatusBadRequest)
 	}
 
 	password := ctx.Query("password")
 	if len(password) <= 0 {
-		ctx.SendStatus(http.StatusBadRequest)
 		logrus.Errorf("[Login/Confirm] Missing password")
-		return
+		return ctx.SendStatus(http.StatusBadRequest)
 	}
 
 	sessionID, err := a.LoginSession.Authenticate(email, password)
 	if err != nil {
-		ctx.SendStatus(http.StatusInternalServerError)
 		logrus.Errorf("[Login/Confirm] Could not authenticate: %v", err)
-		return
+		return ctx.SendStatus(http.StatusInternalServerError)
 	}
 
 	ctx.Cookie(&fiber.Cookie{
@@ -36,5 +33,5 @@ func (a *api) handleLoginConfirm(ctx *fiber.Ctx) {
 		Path:    "/",
 		Expires: time.Now().Add(14 * 24 * time.Hour),
 	})
-	ctx.Redirect("/")
+	return ctx.Redirect("/")
 }

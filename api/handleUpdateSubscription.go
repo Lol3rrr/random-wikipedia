@@ -4,33 +4,30 @@ import (
 	"net/http"
 	"random_wikipedia/general"
 
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
 )
 
-func (a *api) handleUpdateSubscripton(ctx *fiber.Ctx) {
+func (a *api) handleUpdateSubscripton(ctx *fiber.Ctx) error {
 	var body map[string]string
 	err := ctx.BodyParser(&body)
 	if err != nil {
-		ctx.SendStatus(http.StatusBadRequest)
 		logrus.Errorf("[Subscription/Update] Parsing body: %v", err)
-		return
+		return ctx.SendStatus(http.StatusBadRequest)
 	}
 
 	subscription, found := body["Subscription"]
 	if !found {
-		ctx.SendStatus(http.StatusBadRequest)
-		return
+		return ctx.SendStatus(http.StatusBadRequest)
 	}
 
 	user := ctx.Locals("user").(general.User)
 
 	err = a.DBSession.InsertSubscription(user.ID, subscription, true)
 	if err != nil {
-		ctx.SendStatus(http.StatusInternalServerError)
 		logrus.Errorf("[Subscription/Update] Updating subscription: %v", err)
-		return
+		return ctx.SendStatus(http.StatusInternalServerError)
 	}
 
-	ctx.SendStatus(http.StatusOK)
+	return ctx.SendStatus(http.StatusOK)
 }

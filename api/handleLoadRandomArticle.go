@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"random_wikipedia/general"
 
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
 )
 
@@ -18,19 +18,17 @@ func loadLists(ctx *fiber.Ctx) ([]int, error) {
 	return query["lists"], nil
 }
 
-func (a *api) handleLoadRandomArticle(ctx *fiber.Ctx) {
+func (a *api) handleLoadRandomArticle(ctx *fiber.Ctx) error {
 	lists, err := loadLists(ctx)
 	if err != nil {
-		ctx.SendStatus(http.StatusBadRequest)
 		logrus.Errorf("[Article/Random] Loading Lists: %v", err)
-		return
+		return ctx.SendStatus(http.StatusBadRequest)
 	}
 
 	article, err := a.WikipediaSession.GetRandomArticle(lists)
 	if err != nil {
-		ctx.SendStatus(http.StatusInternalServerError)
 		logrus.Errorf("[Article/Random] Loading Random Article: %v", err)
-		return
+		return ctx.SendStatus(http.StatusInternalServerError)
 	}
 
 	articleResponse := general.ArticleNotification{
@@ -39,8 +37,5 @@ func (a *api) handleLoadRandomArticle(ctx *fiber.Ctx) {
 		URL:   article.URL,
 	}
 
-	err = ctx.JSON(articleResponse)
-	if err != nil {
-		logrus.Errorf("[Article/Random] Sending JSON: %v", err)
-	}
+	return ctx.JSON(articleResponse)
 }

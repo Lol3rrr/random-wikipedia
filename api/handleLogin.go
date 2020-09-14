@@ -3,32 +3,29 @@ package api
 import (
 	"net/http"
 
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
 )
 
-func (a *api) handleLogin(ctx *fiber.Ctx) {
+func (a *api) handleLogin(ctx *fiber.Ctx) error {
 	var body map[string]string
 	err := ctx.BodyParser(&body)
 	if err != nil {
-		ctx.SendStatus(http.StatusBadRequest)
 		logrus.Errorf("[Login] Parsing Body: %v", err)
-		return
+		return ctx.SendStatus(http.StatusBadRequest)
 	}
 
 	email, found := body["email"]
 	if !found {
-		ctx.SendStatus(http.StatusBadRequest)
 		logrus.Errorf("[Login] Did not contain email Field")
-		return
+		return ctx.SendStatus(http.StatusBadRequest)
 	}
 
 	err = a.LoginSession.Login(email)
 	if err != nil {
-		ctx.SendStatus(http.StatusInternalServerError)
 		logrus.Errorf("[Login] Could not send login: %v", err)
-		return
+		return ctx.SendStatus(http.StatusInternalServerError)
 	}
 
-	ctx.SendStatus(http.StatusOK)
+	return ctx.SendStatus(http.StatusOK)
 }

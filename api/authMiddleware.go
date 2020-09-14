@@ -4,7 +4,7 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
 )
 
@@ -22,20 +22,18 @@ func getSessionID(ctx *fiber.Ctx) (string, error) {
 	return "", errors.New("Could not find SessionID")
 }
 
-func (a *api) Auth(ctx *fiber.Ctx) {
+func (a *api) Auth(ctx *fiber.Ctx) error {
 	sessionID, err := getSessionID(ctx)
 	if err != nil {
-		ctx.SendStatus(http.StatusUnauthorized)
-		return
+		return ctx.SendStatus(http.StatusUnauthorized)
 	}
 
 	user, err := a.DBSession.LoadUserSessionID(sessionID)
 	if err != nil {
 		logrus.Errorf("[Auth-Middleware] Loading User: %v", err)
-		ctx.SendStatus(http.StatusBadRequest)
-		return
+		return ctx.SendStatus(http.StatusBadRequest)
 	}
 
 	ctx.Locals("user", user)
-	ctx.Next()
+	return ctx.Next()
 }
