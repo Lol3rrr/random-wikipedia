@@ -11,11 +11,15 @@ The Prefix is defined using an environment varialbe and will simply be added to 
 ### Notifications
 `CREATE TABLE IF NOT EXISTS Notifications (ID TEXT NOT NULL PRIMARY KEY, Subscription TEXT NOT NULL);`
 ### Settings
-`CREATE TABLE IF NOT EXISTS Settings (ID TEXT NOT NULL PRIMARY KEY, Notifytime TEXT NOT NULL);`
+`CREATE TABLE IF NOT EXISTS Settings (ID TEXT NOT NULL PRIMARY KEY, Notifytime INTEGER);`
 ### Userlists
-`CREATE TABLE IF NOT EXISTS Userlists (ID TEXT NOT NULL PRIMARY KEY, ListID INTEGER);`
+`CREATE TABLE IF NOT EXISTS Userlists (ID TEXT NOT NULL, ListID INTEGER);`
 ### Lists
 `CREATE TABLE IF NOT EXISTS Lists (ListID INTEGER PRIMARY KEY, Title TEXT NOT NULL);`
+### Favorites
+`CREATE TABLE IF NOT EXISTS Favorites (ID TEXT NOT NULL PRIMARY KEY, ArticleID INTEGER);`
+### FavArticles
+`CREATE TABLE IF NOT EXISTS FavArticles (ArticleID INTEGER PRIMARY KEY, Title TEXT NOT NULL, URL TEXT NOT NULL);`
 
 ## Secrets
 ### /kv/data/wikipedia/email
