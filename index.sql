@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX idx_Userlists_ID_ListID on Userlists (ID, ListID);
