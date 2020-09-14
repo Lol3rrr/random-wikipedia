@@ -4,7 +4,6 @@ POSTGRES_ID=$(docker run -d -e POSTGRES_PASSWORD=devPassword -e POSTGRES_USER=de
 echo "Postgres: $POSTGRES_ID";
 
 sleep 3s;
-docker exec -it $POSTGRES_ID ls
 docker cp ./schema.sql $POSTGRES_ID:/schema.sql
 docker exec -it $POSTGRES_ID psql -d devWikipedia -U devAdmin -f schema.sql
 docker cp ./index.sql $POSTGRES_ID:/index.sql
