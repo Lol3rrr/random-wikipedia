@@ -8,6 +8,9 @@ func CalculateTimeToInterval(current time.Time, interval time.Duration) time.Dur
 	if nextTime.After(current) {
 		return nextTime.Sub(current)
 	}
+	if nextTime.Before(current) {
+		return nextTime.Add(interval).Sub(current)
+	}
 
 	return interval
 }

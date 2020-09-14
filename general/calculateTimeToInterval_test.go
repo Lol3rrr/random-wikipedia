@@ -28,6 +28,12 @@ func TestCalculateTimeToInterval(t *testing.T) {
 		},
 		{
 			Name:          "Valid",
+			InputTime:     time.Unix(6*60, 0),
+			InputInterval: 5 * time.Minute,
+			Result:        4 * time.Minute,
+		},
+		{
+			Name:          "Valid",
 			InputTime:     time.Unix(1598891919, 0),
 			InputInterval: 15 * time.Minute,
 			Result:        6*time.Minute + 21*time.Second,
