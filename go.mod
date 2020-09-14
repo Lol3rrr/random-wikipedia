@@ -1,6 +1,6 @@
 module random_wikipedia
 
-go 1.14
+go 1.15
 
 require (
 	github.com/Lol3rrr/cvault v0.4.4
