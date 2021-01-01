@@ -32,7 +32,7 @@ jobs:
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
         with:
-          images: random-wikipedia-backend # list of Docker images to use as base name for tags
+          images: lol3r/random-wikipedia-backend # list of Docker images to use as base name for tags
           tag-sha: true # add git short SHA as Docker tag
           tag-latest: true
       - name: Set up QEMU
