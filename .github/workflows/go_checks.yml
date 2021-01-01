@@ -27,6 +27,13 @@ jobs:
     needs: testing
     if: contains(github.ref, 'master')
     steps:
+      - name: Docker meta
+        id: docker_meta
+        uses: crazy-max/ghaction-docker-meta@v1
+        with:
+          images: random-wikipedia-backend # list of Docker images to use as base name for tags
+          tag-sha: true # add git short SHA as Docker tag
+          tag-latest: true
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
@@ -41,10 +48,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: 
-            - lol3r/random-wikipedia-backend:latest
-            - lol3r/random-wikipedia-backend:$GITHUB_SHA
-
+          tags: ${{ steps.docker_meta.outputs.tags }}
+          
   deploy:
     runs-on: ubuntu-latest
     needs: build
