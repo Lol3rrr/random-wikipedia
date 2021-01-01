@@ -1,22 +1,16 @@
 package database
 
-import (
-	"github.com/Lol3rrr/sqlvault"
-)
-
 func (s *session) DeletePassword(ID string) error {
-	err := s.SQLSession.WithRetry(func(con sqlvault.DB) error {
-		deleteQuery := `DELETE FROM ` +
-			s.PasswordsTable +
-			` WHERE ID=$1;`
+	con, err := s.SQLSession.GetConnection()
+	if err != nil {
+		return err
+	}
 
-		_, err := con.Exec(deleteQuery, ID)
-		if err != nil {
-			return err
-		}
+	deleteQuery := `DELETE FROM ` +
+		s.PasswordsTable +
+		` WHERE ID=$1;`
 
-		return nil
-	})
+	_, err = con.Exec(deleteQuery, ID)
 	if err != nil {
 		return err
 	}
