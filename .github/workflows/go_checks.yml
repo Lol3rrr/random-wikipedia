@@ -27,6 +27,7 @@ jobs:
     needs: testing
     if: contains(github.ref, 'master')
     steps:
+      - uses: actions/checkout@v2
       - name: Docker meta
         id: docker_meta
         uses: crazy-max/ghaction-docker-meta@v1
@@ -48,6 +49,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: .
+          file: ./Dockerfile
           push: true
           platforms: linux/amd64
           tags: ${{ steps.docker_meta.outputs.tags }}
