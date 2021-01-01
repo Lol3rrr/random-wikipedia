@@ -59,9 +59,13 @@ jobs:
     needs: build
     if: contains(github.ref, 'master')
     steps:
+      - uses: actions/checkout@v2
+      - name: Set outputs
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
       - name: Deploy to Cluster
         uses: steebchen/kubectl@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: set image deployment/random-wikipedia-backend random-wikipedia-backend=lol3r/random-wikipedia-backend:$GITHUB_SHA
+          args: set image deployment/random-wikipedia-backend random-wikipedia-backend=lol3r/random-wikipedia-backend:$${{ steps.vars.outputs.sha_short }}
