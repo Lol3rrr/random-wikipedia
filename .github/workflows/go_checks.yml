@@ -35,6 +35,7 @@ jobs:
           images: lol3r/random-wikipedia-backend # list of Docker images to use as base name for tags
           tag-sha: true # add git short SHA as Docker tag
           tag-latest: true
+          tag-custom: ['latest']
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
@@ -68,4 +69,4 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: set image deployment/random-wikipedia-backend random-wikipedia-backend=lol3r/random-wikipedia-backend:$${{ steps.vars.outputs.sha_short }}
+          args: set image deployment/random-wikipedia-backend random-wikipedia-backend=lol3r/random-wikipedia-backend:sha-${GITHUB_SHA::8}
