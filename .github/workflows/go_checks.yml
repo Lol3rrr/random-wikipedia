@@ -64,4 +64,4 @@ jobs:
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
         with:
-          args: set image deployment/random-wikipedia-backend random-wikipedia-backend=$GITHUB_SHA
+          args: set image deployment/random-wikipedia-backend random-wikipedia-backend=lol3r/random-wikipedia-backend:$GITHUB_SHA
