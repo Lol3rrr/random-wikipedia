@@ -75,6 +75,7 @@ jobs:
     needs: deploy
     if: contains(github.ref, 'master')
     steps:
+      - uses: actions/checkout@v2
       - name: Set outputs
         id: vars
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
@@ -82,5 +83,5 @@ jobs:
         with:
           apiHost: https://grafana.lol3r.net
           apiToken: ${{ secrets.GRAFANA_API_TOKEN }}
-          text: Deployed service 'random-wikipedia-backend' \n\n <a href=\"https://github.com/Lol3rrr/random-wikipedia/commit/${GITHUB_SHA}\" target=\"_blank\">Git (${{ steps.vars.outputs.sha_short }}) </a>
+          text: Deployed service 'random-wikipedia-backend' \\n\\n <a href=\"https://github.com/Lol3rrr/random-wikipedia/commit/${{ github.sha }}\" target=\"_blank\">Git (${{ steps.vars.outputs.sha_short }}) </a>
           tags: deployment,tier:backend
