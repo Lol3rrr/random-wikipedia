@@ -21,7 +21,7 @@ import (
 func main() {
 	logrus.Infof("Starting...")
 
-	vaultSession, err := cvault.CreateSessionEnv()
+	vaultSession, err := cvault.CreateKubernetesSessionEnv()
 	if err != nil {
 		logrus.Errorf("Creating Vault Session: %v", err)
 		return
